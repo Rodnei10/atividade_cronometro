@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRONÔMETRO</title>
+</head>
+<body>
+    
+    <h1>Cronômetro</h1>
+    <br>
+    <div id="tempo">00:00:00</div>
+    <br>
+    <button onclick="start()">Start</button>
+    <button onclick="stop()">Stop</button>
+    <button onclick="reset()">Reset</button>
+    <br>
+
+    <script>
+        let seg = 0;
+        let min = 0;
+        let hor = 0;
+        let intervalo;
+
+        function start() {
+            intervalo = setInterval(function() {
+                seg++;
+                if (seg == 60) {
+                    seg = 0;
+                    min++;
+                }
+                
+                if (min == 60) {
+                    min = 0;
+                    hor++;
+                }
+                
+                document.getElementById('tempo').innerHTML = (hor < 10 ? '0' + hor : hor) + ':' + (min < 10 ? '0' + min : min) + ':' + (seg < 10 ? '0' + seg : seg);
+            }, 200);
+        }
+
+        function stop() {
+            clearInterval(intervalo);
+        }
+
+        function reset() {
+            clearInterval(intervalo);
+            document.getElementById('tempo').innerHTML = '00:00:00';
+            seg = 0;
+            min = 0;
+            hor = 0;
+        }
+    </script>
+</body>
+</html>
+
